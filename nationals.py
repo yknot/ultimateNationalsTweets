@@ -116,17 +116,21 @@ def twentyMins(ultilive, nattys):
     sns.set(style='darkgrid', context='poster')
     plt.figure(figsize=(20,15))
 
+    dfTime = pd.DataFrame(index = np.arange(0,576), columns = ['Time', 'Tweets', 'Source'])
+    dfTime.Time = np.concatenate([range(0,288),range(0,288)])
+    dfTime.Tweets = np.concatenate([ulti_twentyMins, natty_twentyMins])
+    dfTime.Source = np.concatenate([["Ultiworld Live"]*288, ["#NationalsTX"]*288])
 
-    s = sns.tsplot(ulti_twentyMins, color="hls")
-    s = sns.tsplot(natty_twentyMins, color="Set2")
-    s.set_ylabel("Tweets")
+    s = sns.pointplot('Time', 'Tweets', 'Source', data=dfTime, palette="Paired")
     s.set_title("Tweets per Twenty Minutes")
     s.set_xticks([72, 144, 216, 287])
     s.set_xticklabels(['17th', '18th', '19th', '20th'])
     s.set_xlabel("Day")
 
+    s.axis([0,288,0,50])
 
     s.figure.savefig("ByTwenty.png")
+
 
 
 
@@ -137,8 +141,10 @@ ultilive = parseData('ultilive')
 nattys = parseData('nattys')
 
 # plot tweets per hour
-#barplotHours(ultilive, nattys)
+barplotHours(ultilive, nattys)
 
 # scatterplot of tweets throughout the time
 twentyMins(ultilive, nattys)
+
+
 
