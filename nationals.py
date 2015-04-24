@@ -87,7 +87,7 @@ def barplotHours(ultilive, nattys):
     # save output
     s.figure.savefig("ByHour.png")
 
-    print dfHours
+
 
 
 def twentyMins(ultilive, nattys):
@@ -139,6 +139,15 @@ def twentyMins(ultilive, nattys):
 # parse data into nice format
 ultilive = parseData('ultilive')
 nattys = parseData('nattys')
+
+print ultilive.describe()
+print nattys.describe()
+
+print "\tUltilive\t#NationalsTX"
+print "Day 1:\t" + str(len(ultilive[ultilive.day == 16])) + '\t\t' + str(len(nattys[nattys.day == 16]))
+print "Day 2:\t" + str(len(ultilive[ultilive.day == 17])) + '\t\t' + str(len(nattys[nattys.day == 17]))
+print "Day 3:\t" + str(len(ultilive[ultilive.day == 18])) + '\t\t' + str(len(nattys[nattys.day == 18]))
+print "Day 4:\t" + str(len(ultilive[ultilive.day == 19])) + '\t\t' + str(len(nattys[nattys.day == 19]))
 
 # plot tweets per hour
 barplotHours(ultilive, nattys)
